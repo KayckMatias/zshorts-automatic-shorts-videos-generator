@@ -4,6 +4,6 @@ function getRootDir(){
     return path.join(__dirname, '../../');
 }
 
-modules.exports = {
+module.exports = {
     getRootDir
 }

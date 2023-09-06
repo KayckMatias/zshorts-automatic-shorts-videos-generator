@@ -1,5 +1,17 @@
+const gTTS = require("gtts");
+const path = require('path');
+
+const Logger = require('../utils/logger');
+const { randomUUID } = require('crypto');
+const { PathResolve } = require('../utils/resolve');
+
 class Story {
-  story = "";
+  storyId;
+  story;
+
+  constructor(){
+    this.storyId = randomUUID();
+  }
 
   makeStory() {
     //AFTER MAKE A FUNCTION TO COLLECT HISTORY FROM CHAT GPT
@@ -11,9 +23,31 @@ class Story {
         A coragem estava prestes a me abandonar quando, de repente, uma voz ecoou em minha mente. Era suave e acolhedora, como uma canção de ninar em meio ao caos. A voz me disse para não ter medo, que a floresta estava viva e que eu estava sendo testado.
         Com as palavras da voz me guiando, continuei minha jornada. As sombras recuaram, os sons sinistros se dissiparam e, finalmente, emergi da floresta sombria, ileso, mas profundamente transformado.
         A lição que aprendi naquela noite assombrosa foi que, às vezes, para encontrar a luz, é preciso enfrentar as trevas mais profundas. A floresta misteriosa me desafiou a superar o medo e a incerteza, e ao fazê-lo, descobri uma força dentro de mim que eu nunca soube que existia. Desde então, nunca mais olhei para as sombras com o mesmo temor, pois sei que, mesmo nos lugares mais sombrios, a esperança e a coragem podem brilhar intensamente.`;
+
+    return this;
   }
 
-  buildNarration(){
+  buildStoryNarration() {
+    const gtts = new gTTS(this.story, "pt-br");
+
+    Logger.debug(`Narration from history "${this.storyId}" generated`);
+
+    this.#saveNarration(gtts);
     
+    return this;
+  }
+
+  #saveNarration(narration){
+    const pathToSave = path.join(PathResolve.narrations, `${this.storyId}.mp3`);
+    
+    narration.save(pathToSave, function (err, result) {
+        if (err) {
+          throw new Error(err);
+        }
+
+        Logger.debug(`Narration "${this.storyId}" saved in ${PathResolve.narrations}`);
+      });
   }
 }
+
+module.exports = Story;

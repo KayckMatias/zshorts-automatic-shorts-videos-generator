@@ -1,6 +1,10 @@
-const Logger = require('./src/utils/logger');
-const Story = require('./src/shorts/story');
+const Logger = require("./src/utils/logger");
+const Story = require("./src/shorts/story");
 
-Logger.info('------------ STARTING NEW SHORT ------------');
-new Story().makeStory().buildStoryNarration();
-Logger.info('------------ ENDING OF NEW SHORT ------------');
+async function newStory() {
+  Logger.info("------------ STARTING NEW SHORT ------------");
+  await new Story().makeStory().buildStoryNarration();
+  Logger.info("------------ ENDING OF NEW SHORT ------------");
+}
+
+newStory();

@@ -1,0 +1,22 @@
+{
+  "name": "zshorts",
+  "version": "0.0.1",
+  "description": "a project to automatically make shorts for youtube, tiktok...",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/KayckMatias/zshorts.git"
+  },
+  "author": "Kayck Matias",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/KayckMatias/zshorts/issues"
+  },
+  "homepage": "https://github.com/KayckMatias/zshorts#readme",
+  "dependencies": {
+    "gtts": "^0.2.1"
+  }
+}

@@ -4,7 +4,7 @@
   "description": "a project to automatically make shorts for youtube, tiktok...",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "generate": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +19,7 @@
   "dependencies": {
     "dotenv": "^16.3.1",
     "fluent-ffmpeg": "^2.1.2",
-    "gtts": "^0.2.1"
+    "gtts": "^0.2.1",
+    "openai": "^4.5.0"
   }
 }

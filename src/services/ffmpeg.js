@@ -42,11 +42,15 @@ async function overrideWithAcceleratedNarration(id, speed = "1.5") {
 }
 
 async function makeShortVideo(video, storyId) {
+  const audioPath = path.join(PathResolve.narrations, `${storyId}.mp3`);
+  const audioDuration = await getFileDuration(audioPath) + 2;
+
   const randomVideoPath = path.join(PathResolve.videos, `${video}`);
 
-  const videoDuration = await getVideoDuration(randomVideoPath);
-  const [min, max] = [0, videoDuration - 120];
+  const videoDuration = await getFileDuration(randomVideoPath);
+  const [min, max] = [0, videoDuration - (audioDuration*2)];
   const randomStart = Math.floor(Math.random() * (max - min + 1) + min);
+
 
   const savePath = path.join(PathResolve.short_videos, `${storyId}.mp4`);
 
@@ -57,7 +61,7 @@ async function makeShortVideo(video, storyId) {
   await new Promise((resolve, reject) => {
     ffmpeg(randomVideoPath)
       .setStartTime(randomStart)
-      .duration(60)
+      .duration(audioDuration)
       .noAudio()
       .output(savePath)
       .on("end", () => {
@@ -93,9 +97,11 @@ async function joinShortVideoWithAudio(storyId) {
   });
 
   Logger.debug(`"${storyId}" Short video joined!`);
+
+  return savePath;
 }
 
-async function getVideoDuration(path) {
+async function getFileDuration(path) {
   return new Promise((resolve, reject) => {
     ffmpeg.ffprobe(path, (err, metadata) => {
       if (err) {
@@ -110,5 +116,5 @@ async function getVideoDuration(path) {
 module.exports = {
   overrideWithAcceleratedNarration,
   makeShortVideo,
-  joinShortVideoWithAudio
+  joinShortVideoWithAudio,
 };

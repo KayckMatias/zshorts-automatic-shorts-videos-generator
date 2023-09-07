@@ -9,6 +9,19 @@ function listAllAvailableVideos() {
   });
 }
 
+async function getDefaultStoryFile() {
+  return new Promise((resolve, reject) => {    
+    fs.readFile(PathResolve.manual_story, "utf8", (err, story) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(JSON.parse(story));
+      }
+    });
+  });
+}
+
 module.exports = {
-  listAllAvailableVideos
+  listAllAvailableVideos,
+  getDefaultStoryFile,
 };

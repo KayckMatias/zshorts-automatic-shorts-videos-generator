@@ -12,7 +12,7 @@ class Short {
 
     await makeShortVideo(randomVideo, this.storyId);
 
-    await joinShortVideoWithAudio(this.storyId);
+    return await joinShortVideoWithAudio(this.storyId);
   }
 
   async #getVideoRandomCut() {

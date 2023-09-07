@@ -18,13 +18,17 @@ class Story {
     this.storyId = randomUUID();
   }
 
+  /**
+   * Generates a story using either ChatGpt or the default story file.
+   * @returns {this}
+   */
   async makeStory() {
     let storyGenerated = null;
 
     if (process.env.STORY_BY_GPT == "true") {
       const chatGptClient = new ChatGpt();
       storyGenerated = await chatGptClient.createNewStory();
-    }else{
+    } else {
       storyGenerated = await getDefaultStoryFile();
     }
 
@@ -34,6 +38,11 @@ class Story {
     return this;
   }
 
+  /**
+   * Builds the narration for the story.
+   *
+   * @returns {Promise<string>} The ID of the generated story narration.
+   */
   async buildStoryNarration() {
     const gtts = new gTTS(this.story, "pt-br");
 
@@ -50,6 +59,12 @@ class Story {
     return this.storyId;
   }
 
+  /**
+   * Save story to a file.
+   *
+   * @param {Object} storyToSave - The story object JSON to save.
+   * @returns {void}
+   */
   #saveStory(storyToSave) {
     const pathToSave = path.join(PathResolve.stories, `${this.storyId}.json`);
     const storyStringify = JSON.stringify(storyToSave);
@@ -63,9 +78,15 @@ class Story {
     });
   }
 
+  /**
+   * Save narration to a file.
+   *
+   * @param {gTTS} narration - The narration to save.
+   * @returns {Promise<boolean>} - A promise that resolves to true if the narration is saved successfully, or rejects with an error.
+   */
   #saveNarration(narration) {
     const pathToSave = path.join(PathResolve.narrations, `${this.storyId}.mp3`);
-    
+
     const storyId = this.storyId;
     return new Promise((resolve, reject) => {
       narration.save(pathToSave, function (err, result) {

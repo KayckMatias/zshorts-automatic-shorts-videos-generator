@@ -5,8 +5,17 @@ const ffmpeg = require("fluent-ffmpeg");
 const Logger = require("../utils/logger");
 const { PathResolve } = require("../utils/resolve");
 
-async function overrideWithAcceleratedNarration(id, speed = "1.5") {
-  const currentNarrationPath = path.join(PathResolve.narrations, `${id}.mp3`);
+/**
+ * Overrides the narration with accelerated audio.
+ * @param {string} id The ID of the narration.
+ * @param {string} speed The speed to accelerate the audio. Default is "1.5".
+ * @returns A boolean indicating whether the audio was successfully accelerated.
+ */
+async function overrideWithAcceleratedNarration(storyId, speed = "1.5") {
+  const currentNarrationPath = path.join(
+    PathResolve.narrations,
+    `${storyId}.mp3`
+  );
   const acceleratedPath = currentNarrationPath + ".accelerated.mp3";
 
   Logger.debug(`Accelerating "${currentNarrationPath}"`);
@@ -25,13 +34,6 @@ async function overrideWithAcceleratedNarration(id, speed = "1.5") {
     });
 
     await fs.renameSync(acceleratedPath, currentNarrationPath);
-
-    // await promisify(
-    //   ffmpeg(currentNarrationPath)
-    //     .audioFilter(`atempo=${speed}`)
-    //     .saveToFile(acceleratedPath)
-    // );
-    // await fs.promises.rename(acceleratedPath, currentNarrationPath);
   } catch (err) {
     Logger.error(err.msg);
   }
@@ -41,16 +43,21 @@ async function overrideWithAcceleratedNarration(id, speed = "1.5") {
   return true;
 }
 
+/**
+ * Generates a short video for a given story.
+ * @param {string} video - The name of the video file.
+ * @param {string} storyId - The ID of the story.
+ * @returns {Promise<void>} - A promise that resolves when the short video is generated.
+ */
 async function makeShortVideo(video, storyId) {
   const audioPath = path.join(PathResolve.narrations, `${storyId}.mp3`);
-  const audioDuration = await getFileDuration(audioPath) + 2;
+  const audioDuration = (await getFileDuration(audioPath)) + 2;
 
   const randomVideoPath = path.join(PathResolve.videos, `${video}`);
 
   const videoDuration = await getFileDuration(randomVideoPath);
-  const [min, max] = [0, videoDuration - (audioDuration*2)];
+  const [min, max] = [0, videoDuration - audioDuration * 2];
   const randomStart = Math.floor(Math.random() * (max - min + 1) + min);
-
 
   const savePath = path.join(PathResolve.short_videos, `${storyId}.mp4`);
 
@@ -76,6 +83,11 @@ async function makeShortVideo(video, storyId) {
   Logger.debug(`"${storyId}" Short video generated!`);
 }
 
+/**
+ * Join a short video with audio.
+ * @param {string} storyId - The ID of the story.
+ * @returns {Promise<string>} - The path of the joined video.
+ */
 async function joinShortVideoWithAudio(storyId) {
   const videoPath = path.join(PathResolve.short_videos, `${storyId}.mp4`);
   const audioPath = path.join(PathResolve.narrations, `${storyId}.mp3`);
@@ -101,6 +113,12 @@ async function joinShortVideoWithAudio(storyId) {
   return savePath;
 }
 
+/**
+ * Retrieves the duration of a file.
+ *
+ * @param {string} path - The path of the file.
+ * @returns {Promise<number>} - A promise that resolves to the duration of the file in seconds.
+ */
 async function getFileDuration(path) {
   return new Promise((resolve, reject) => {
     ffmpeg.ffprobe(path, (err, metadata) => {

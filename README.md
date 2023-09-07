@@ -16,6 +16,7 @@ npm i
 
 # Configuration
 First, <b>you need to populate the "```/static/videos```" folder with videos</b> that will be used as backgrounds for the generated shorts.
+[(video example)](https://www.youtube.com/watch?v=Qu1am4A4Rqs)
 
 This system works with two modes: ```manual story``` and ```auto-generated story from GPT```
 

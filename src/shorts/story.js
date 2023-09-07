@@ -26,7 +26,8 @@ class Story {
     //     Com as palavras da voz me guiando, continuei minha jornada. As sombras recuaram, os sons sinistros se dissiparam e, finalmente, emergi da floresta sombria, ileso, mas profundamente transformado.
     //     A lição que aprendi naquela noite assombrosa foi que, às vezes, para encontrar a luz, é preciso enfrentar as trevas mais profundas. A floresta misteriosa me desafiou a superar o medo e a incerteza, e ao fazê-lo, descobri uma força dentro de mim que eu nunca soube que existia. Desde então, nunca mais olhei para as sombras com o mesmo temor, pois sei que, mesmo nos lugares mais sombrios, a esperança e a coragem podem brilhar intensamente.`;
 
-    this.story = "teste";
+    this.story =
+      "Em uma noite escura e tempestuosa, eu me encontrava sozinho em uma floresta densa e misteriosa. As árvores se erguiam imponentes ao meu redor, suas sombras se contorcendo como criaturas vivas, enquanto os rugidos do vento ecoavam sinistramente pelos corredores naturais da floresta. Eu sabia que estava em território desconhecido, mas havia algo que me impelia a continuar avançando.";
     return this;
   }
 
@@ -37,13 +38,13 @@ class Story {
 
     try {
       await this.#saveNarration(gtts);
-      
+
       await overrideWithAcceleratedNarration(this.storyId);
     } catch (e) {
       Logger.error(e);
     }
 
-    return this;
+    return this.storyId;
   }
 
   #saveNarration(narration) {

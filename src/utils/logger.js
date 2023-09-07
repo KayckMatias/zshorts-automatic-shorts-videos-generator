@@ -1,15 +1,16 @@
 const fs = require("fs");
 const path = require("path");
 const { formatDate } = require("./format");
-const { getRootDir } = require("./helpers");
+const { PathResolve } = require("./resolve");
 
 class Logger {
-  static #logFilePath = path.join(getRootDir(), 'logs/zshorts.log');
+  static #logFilePath = path.join(PathResolve.getRootDir(), "logs/zshorts.log");
 
   static #registerLog(message, level) {
     const timestamp = formatDate();
     const fullLogMessage = `[${level}] - ${timestamp}: ${message} \n`;
 
+    console.log(fullLogMessage);
     this.#appendFile(fullLogMessage);
   }
 
@@ -25,7 +26,7 @@ class Logger {
   static #validateLog() {
     if (!fs.existsSync(this.#logFilePath)) {
       try {
-        fs.writeFileSync(this.#logFilePath, '');
+        fs.writeFileSync(this.#logFilePath, "");
       } catch (err) {
         console.error("Error on create log file:", err);
       }
@@ -41,7 +42,9 @@ class Logger {
   }
 
   static debug(message) {
-    this.#registerLog(message, "DEBUG");
+    if (process.env.DEBUG === "true") {
+      this.#registerLog(message, "DEBUG");
+    }
   }
 
   static info(message) {

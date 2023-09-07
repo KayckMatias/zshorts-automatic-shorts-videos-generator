@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/KayckMatias/zshorts#readme",
   "dependencies": {
+    "dotenv": "^16.3.1",
     "fluent-ffmpeg": "^2.1.2",
     "gtts": "^0.2.1"
   }

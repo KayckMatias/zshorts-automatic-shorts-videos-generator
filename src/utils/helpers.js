@@ -1,9 +1,14 @@
-const path = require('path');
+const path = require("path");
+const fs = require("fs");
 
-function getRootDir(){
-    return path.join(__dirname, '../../');
+const { PathResolve } = require("./resolve");
+
+function listAllAvailableVideos() {
+  return fs.readdirSync(PathResolve.videos).filter((file) => {
+    return path.extname(file).toLowerCase() === ".mp4";
+  });
 }
 
 module.exports = {
-    getRootDir
-}
+  listAllAvailableVideos
+};

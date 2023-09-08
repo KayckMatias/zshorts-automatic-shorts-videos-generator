@@ -38,7 +38,7 @@ async function overrideWithAcceleratedNarration(storyId, speed = "1.5") {
     Logger.error(err.msg);
   }
 
-  Logger.debug(`"${id}" Accelerated!`);
+  Logger.debug(`"${storyId}" Accelerated!`);
 
   return true;
 }

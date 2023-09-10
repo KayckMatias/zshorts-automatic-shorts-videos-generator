@@ -66,10 +66,27 @@ async function makeShortVideo(video, storyId) {
   );
 
   await new Promise((resolve, reject) => {
-    ffmpeg(randomVideoPath)
+    const ffmpegClient = ffmpeg(randomVideoPath)
       .setStartTime(randomStart)
       .duration(audioDuration)
       .noAudio()
+      .videoFilters(["scale=iw:iw", "crop=iw/2.77777778:ih"]);
+
+    if (process.env.LOGO_ENABLED == "true") {
+      const logoText = process.env.LOGO_TEXT;
+      ffmpegClient.videoFilter(
+        `drawtext=text='${logoText}':x=(w-tw)/2:y=(h-th)/2:fontsize=36:fontcolor=white@0.6`
+      );
+    }
+
+    if (process.env.SUBTITLE_ENABLED == "true") {
+      const subtitlePath = path.join(PathResolve.subtitles, `${storyId}.srt`);
+      ffmpegClient.videoFilter(
+        `subtitles=${subtitlePath}:force_style='Outline=1.5,FontSize=12,PrimaryColour=&H0000FFFF'`
+      );
+    }
+
+    ffmpegClient
       .output(savePath)
       .on("end", () => {
         resolve();

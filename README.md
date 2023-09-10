@@ -35,6 +35,10 @@ You can customize the payload sended to ChatGPT generate the story in field ```P
 ### Attention for "auto-generated story from GPT" mode
 ```PAYLOAD_CHATGPT``` is a customizable payload, it is concatenated with another payload to generate the story in a standard way, if you want to change it, customize it in the file: "```/src/services/chatgpt.js```" however, it can cause problems in the system, be careful.
 
+
+### Attention for subtitle
+We are using whisper to generate automatic subtitles, [read more about the models (available and requirements) here](https://github.com/openai/whisper#available-models-and-languages)
+
 # Usage
 To use it is very simple, just after making the configuration run in your terminal:
 ```shell
@@ -45,7 +49,7 @@ npm run generate
 if you are using ```manual story``` mode, you need populate the file "```/static/manual_story.json```" with the data you want for your story.
 
 # Future Update:
-- [ ] Add automatic subtitle in video based in audio generated
+- [x] Add automatic subtitle in video based in audio generated
 - [ ] Add random categories and video filter based in category choiced (example, horror story: darkness filter to video)
 - [ ] Add a automatic upload to youtube and tiktok
 

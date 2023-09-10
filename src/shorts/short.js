@@ -1,5 +1,6 @@
 const Logger = require("../utils/logger");
 const { listAllAvailableVideos } = require("../utils/helpers");
+const { makeSubtitleForStory } = require("../services/subtitle");
 const {
   makeShortVideo,
   joinShortVideoWithAudio,
@@ -17,6 +18,10 @@ class Short {
    */
   async makeNewShortVideo() {
     const randomVideo = await this.#getVideoRandomCut();
+
+    if (process.env.SUBTITLE_ENABLED == "true") {
+      await makeSubtitleForStory(this.storyId);
+    }
 
     await makeShortVideo(randomVideo, this.storyId);
 

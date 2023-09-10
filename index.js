@@ -4,6 +4,9 @@ const Logger = require("./src/utils/logger");
 const Story = require("./src/shorts/story");
 const Short = require("./src/shorts/short");
 
+const { getStoryData } = require("./src/utils/helpers");
+const { formatStoryData } = require("./src/utils/format");
+
 async function newStory() {
   Logger.info("------------ STARTING NEW SHORT ------------");
 
@@ -15,6 +18,10 @@ async function newStory() {
     const shortGenerated = await new Short(story.storyId).makeNewShortVideo();
 
     Logger.info("Successfully generated Short in: " + shortGenerated);
+
+    const storyData = await getStoryData(story.storyId);
+
+    Logger.info(formatStoryData(storyData));
   } catch (e) {
     Logger.error(e);
   }

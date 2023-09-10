@@ -28,7 +28,16 @@ function formatDate() {
   return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 }
 
+function formatStoryData(storyData) {
+  return `Story Info: \r
+  Title: ${storyData.title} \r
+  Tags: ${storyData.tags.join(",")} \r
+  Description: ${storyData.description} \r
+  Story: ${storyData.story} \r`;
+}
+
 module.exports = {
   formatDate,
   formatPadStart,
+  formatStoryData
 };

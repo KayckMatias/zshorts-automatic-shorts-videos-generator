@@ -29,7 +29,26 @@ async function getDefaultStoryFile() {
   });
 }
 
+async function getStoryData(storyId = null) {
+  const storyPath =
+    process.env.STORY_BY_GPT == "true"
+      ? path.join(PathResolve.stories, `${storyId}.json`)
+      : path.join(PathResolve.manual_story);
+
+  const storyData = fs.readFileSync(storyPath, "utf8", (err, data) => {
+    if (err) {
+      Logger.error("Error reading the story file:", err);
+      return;
+    }
+
+    return data;
+  });
+
+  return JSON.parse(storyData);
+}
+
 module.exports = {
   listAllAvailableVideos,
   getDefaultStoryFile,
+  getStoryData,
 };

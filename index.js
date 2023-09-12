@@ -7,6 +7,8 @@ const Short = require("./src/shorts/short");
 const { getStoryData } = require("./src/utils/helpers");
 const { formatStoryData } = require("./src/utils/format");
 
+newStory();
+
 async function newStory() {
   Logger.info("------------ STARTING NEW SHORT ------------");
 
@@ -27,5 +29,3 @@ async function newStory() {
   }
   Logger.info("------------ ENDING OF NEW SHORT ------------");
 }
-
-newStory();

@@ -113,8 +113,13 @@ async function joinShortVideoWithAudio(storyId) {
   Logger.debug(`Joining short video with audio for "${storyId}"...`);
 
   await new Promise((resolve, reject) => {
-    ffmpeg(videoPath)
-      .addInput(audioPath)
+    const ffmpegClient = ffmpeg(videoPath).addInput(audioPath);
+
+    if (process.env.LIMIT_SHORT_60_SECONDS == "true") {
+      ffmpegClient.duration(59);
+    }
+
+    ffmpegClient
       .output(savePath)
       .on("end", () => {
         resolve();

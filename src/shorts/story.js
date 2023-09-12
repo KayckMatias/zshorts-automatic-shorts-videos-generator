@@ -32,7 +32,12 @@ class Story {
       storyGenerated = await getDefaultStoryFile();
     }
 
-    this.#saveStory(storyGenerated);
+    const saveWithId = {
+      id: this.storyId,
+      ...storyGenerated,
+    };
+
+    this.#saveStory(saveWithId);
     this.story = storyGenerated.story;
 
     return this;

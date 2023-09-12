@@ -30,10 +30,7 @@ async function getDefaultStoryFile() {
 }
 
 async function getStoryData(storyId = null) {
-  const storyPath =
-    process.env.STORY_BY_GPT == "true"
-      ? path.join(PathResolve.stories, `${storyId}.json`)
-      : path.join(PathResolve.manual_story);
+  const storyPath = path.join(PathResolve.stories, `${storyId}.json`);
 
   const storyData = fs.readFileSync(storyPath, "utf8", (err, data) => {
     if (err) {

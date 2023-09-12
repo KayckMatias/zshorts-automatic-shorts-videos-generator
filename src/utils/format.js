@@ -30,6 +30,7 @@ function formatDate() {
 
 function formatStoryData(storyData) {
   return `Story Info: \r
+  ID: ${storyData.id} \r
   Title: ${storyData.title} \r
   Tags: ${storyData.tags.join(",")} \r
   Description: ${storyData.description} \r

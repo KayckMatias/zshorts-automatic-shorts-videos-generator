@@ -52,7 +52,7 @@ if you are using ```manual story``` mode, you need populate the file "```/static
 # Future Update:
 - [x] Add automatic subtitle in video based in audio generated
 - [ ] Add random categories and video filter based in category choiced (example, horror story: darkness filter to video)
-- [ ] Add a automatic upload to youtube and tiktok
+- [ ] ~~Add a automatic upload to youtube~~ (canceled because YouTube blocks the video due to "suspicion of spam")
 
 <br />
 <p align="center">Made with &hearts; by Kayck Matias</p>

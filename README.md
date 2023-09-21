@@ -21,24 +21,24 @@ First, <b>you need to populate the "```/static/videos```" folder with videos</b>
 
 This system works with two modes: ```manual story``` and ```auto-generated story from GPT```
 
-<h3>Manual Story:</h3> 
+<h4>Manual Story:</h4> 
 
 Set ```STORY_BY_GPT``` to ```false``` in .env file
 
 Copy "```/static/manual_story.json.default```" to "```/static/manual_story.json```" and populate
 
-<h3>Auto-Generated Story from GPT:</h3> 
+<h4>Auto-Generated Story from GPT:</h4> 
 
 Turn ```true``` the ```STORY_BY_GPT``` and set your ```OPENAI_API_KEY``` in .env
 
 You can customize the payload sended to ChatGPT generate the story in field ```PAYLOAD_CHATGPT``` on .env
 
 You can change language in .env on ```LANGUAGE_CHATGPT``` variable.
-<h3>Attention for "auto-generated story from GPT" mode</h3> 
+<h4>Attention for "auto-generated story from GPT" mode</h4> 
 
 ```PAYLOAD_CHATGPT``` is a customizable payload, it is concatenated with another payload to generate the story in a standard way, if you want to change it, customize it in the file: "```/src/services/chatgpt.js```" however, it can cause problems in the system, be careful.
 
-<h3>Attention for subtitle</h3> 
+<h4>Attention for subtitle</h4> 
 
 We are using whisper to generate automatic subtitles, [read more about the models (available and requirements) here](https://github.com/openai/whisper#available-models-and-languages)
 
@@ -48,7 +48,7 @@ To use it is very simple, just after making the configuration run in your termin
 npm run generate
 ```
 
-<h3>Remember</h3>
+<h4>Remember</h4>
 If you are using ```manual story``` mode, you need populate the file "```/static/manual_story.json```" with the data you want for your story.
 
 ## Future Update:

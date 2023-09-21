@@ -6,7 +6,7 @@ const Short = require("./src/shorts/short");
 
 const { getStoryData } = require("./src/utils/helpers");
 const { formatStoryData } = require("./src/utils/format");
-const { PathResolve } = require("./src/utils/resolve");
+const PathResolve = require("./src/utils/resolve");
 
 PathResolve.initializePaths();
 

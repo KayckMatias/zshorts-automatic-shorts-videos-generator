@@ -1,8 +1,6 @@
 # zshorts
 ### A automatic shorts videos generator for youtube, tiktok and more...
 
-<br/>
-
 # Requirements
 - [x] FFmpeg
 - [x] node

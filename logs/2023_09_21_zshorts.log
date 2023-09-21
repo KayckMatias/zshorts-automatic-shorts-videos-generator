@@ -5,3 +5,7 @@
 [DEBUG] - 2023-09-21 20:50:37: Accelerating "/home/kayckmatias/Documents/Programming/zShorts/tmp/narrations/c1d699c6-514d-4a53-bb54-41f7af40f203.mp3" 
 [DEBUG] - 2023-09-21 20:50:37: "c1d699c6-514d-4a53-bb54-41f7af40f203" Accelerated! 
 [DEBUG] - 2023-09-21 20:50:37: Generating subtitle for "c1d699c6-514d-4a53-bb54-41f7af40f203" 
+[DEBUG] - 2023-09-21 20:50:45: Subtitle generated for "c1d699c6-514d-4a53-bb54-41f7af40f203" 
+[DEBUG] - 2023-09-21 20:50:45: Generating short video for "c1d699c6-514d-4a53-bb54-41f7af40f203" starting from 650 seconds using video "1.mp4"... 
+[DEBUG] - 2023-09-21 20:50:46: "c1d699c6-514d-4a53-bb54-41f7af40f203" Short video generated! 
+[DEBUG] - 2023-09-21 20:50:46: Joining short video with audio for "c1d699c6-514d-4a53-bb54-41f7af40f203"... 

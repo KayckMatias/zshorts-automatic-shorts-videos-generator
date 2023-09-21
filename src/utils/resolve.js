@@ -1,6 +1,8 @@
 const path = require("path");
 const fs = require("fs");
 
+const Logger = require("./logger");
+
 class PathResolve {
   static rootDir = path.join(__dirname, "../../");
   static paths = {
@@ -24,6 +26,7 @@ class PathResolve {
       await fs.accessSync(directoryPath, fs.constants.F_OK);
     } catch (err) {
       if (directoryPath[directoryPath.length - 1] === "/") {
+        Logger.info(`Directory "${directoryPath}" does not exist, creating...`);
         await fs.mkdirSync(directoryPath, { recursive: true });
       }
     }
@@ -41,4 +44,4 @@ class PathResolve {
   }
 }
 
-module.exports = { PathResolve };
+module.exports = PathResolve;

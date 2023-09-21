@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const { formatDate } = require("./format");
-const { PathResolve } = require("./resolve");
+const PathResolve = require("./resolve");
 
 class Logger {
   static #logFilePath = path.join(PathResolve.rootDir, "logs/zshorts.log");

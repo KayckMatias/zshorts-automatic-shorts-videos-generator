@@ -1,7 +1,7 @@
 const path = require("path");
 const fs = require("fs");
 
-const { PathResolve } = require("./resolve");
+const PathResolve = require("./resolve");
 
 /**
  * Returns a list of all available videos in the videos directory.

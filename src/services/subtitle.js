@@ -4,7 +4,7 @@ const path = require("path");
 const { nodewhisper } = require("nodejs-whisper");
 
 const Logger = require("../utils/logger");
-const { PathResolve } = require("../utils/resolve");
+const PathResolve = require("../utils/resolve");
 
 /**
  * Generates a subtitle for a given story.
@@ -45,7 +45,7 @@ async function organizePath(storyId) {
     PathResolve.paths.narrations,
     `${storyId}.wav.srt`
   );
-  const subtitleNewPath = path.join(PathResolve.subtitles, `${storyId}.srt`);
+  const subtitleNewPath = path.join(PathResolve.paths.subtitles, `${storyId}.srt`);
 
   await fs.renameSync(subtitleOldPath, subtitleNewPath);
   await fs.unlinkSync(subtitleWavGenerated);

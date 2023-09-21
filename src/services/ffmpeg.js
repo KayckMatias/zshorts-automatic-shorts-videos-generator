@@ -3,7 +3,7 @@ const fs = require("fs");
 const ffmpeg = require("fluent-ffmpeg");
 
 const Logger = require("../utils/logger");
-const { PathResolve } = require("../utils/resolve");
+const PathResolve = require("../utils/resolve");
 
 /**
  * Overrides the narration with accelerated audio.

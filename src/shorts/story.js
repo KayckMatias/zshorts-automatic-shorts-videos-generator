@@ -6,7 +6,7 @@ const gTTS = require("gtts");
 
 const Logger = require("../utils/logger");
 const ChatGpt = require("../services/chatgpt");
-const { PathResolve } = require("../utils/resolve");
+const PathResolve = require("../utils/resolve");
 const { getDefaultStoryFile } = require("../utils/helpers");
 const { overrideWithAcceleratedNarration } = require("../services/ffmpeg");
 

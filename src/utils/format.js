@@ -28,10 +28,25 @@ function formatDate() {
   return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 }
 
+/**
+ * Returns the current date in the format 'YYYY_MM_DD' as a string.
+ *
+ * @returns {string} The formatted date.
+ */
 function formatedDateToFileLog() {
-  return new Date().toISOString().slice(0, 10).replace(/-/g, '_');
+  return new Date().toISOString().slice(0, 10).replace(/-/g, "_");
 }
 
+/**
+ * Formats the story data into a string with specific information.
+ * @param {Object} storyData - The data of the story.
+ * @param {number} storyData.id - The ID of the story.
+ * @param {string} storyData.title - The title of the story.
+ * @param {array} storyData.tags - The tags of the story.
+ * @param {string} storyData.description - The description of the story.
+ * @param {string} storyData.story - The story content.
+ * @returns {string} - The formatted string containing the story information.
+ */
 function formatStoryData(storyData) {
   return `Story Info: \r
   ID: ${storyData.id} \r
@@ -45,5 +60,5 @@ module.exports = {
   formatDate,
   formatPadStart,
   formatedDateToFileLog,
-  formatStoryData
+  formatStoryData,
 };

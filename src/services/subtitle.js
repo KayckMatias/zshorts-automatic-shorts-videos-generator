@@ -15,7 +15,7 @@ const { PathResolve } = require("../utils/resolve");
 async function makeSubtitleForStory(storyId) {
   Logger.debug(`Generating subtitle for "${storyId}"`);
 
-  const narrationsPath = path.join(PathResolve.narrations, `${storyId}.mp3`);
+  const narrationsPath = path.join(PathResolve.paths.narrations, `${storyId}.mp3`);
 
   await nodewhisper(narrationsPath, {
     modelName: process.env.SUBTITLE_WHISPER_MODEL,
@@ -38,11 +38,11 @@ async function makeSubtitleForStory(storyId) {
  */
 async function organizePath(storyId) {
   const subtitleWavGenerated = path.join(
-    PathResolve.narrations,
+    PathResolve.paths.narrations,
     `${storyId}.wav`
   );
   const subtitleOldPath = path.join(
-    PathResolve.narrations,
+    PathResolve.paths.narrations,
     `${storyId}.wav.srt`
   );
   const subtitleNewPath = path.join(PathResolve.subtitles, `${storyId}.srt`);

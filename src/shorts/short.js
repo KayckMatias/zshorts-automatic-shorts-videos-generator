@@ -33,14 +33,15 @@ class Short {
    * @returns {Promise<string | false>} A randomly selected video URL or false if no videos are available.
    */
   async #getVideoRandomCut() {
-    const videosAvailable = listAllAvailableVideos();
+    const videosAvailable = await listAllAvailableVideos();
 
     if (videosAvailable.length == 0) {
       const error = "No videos available to make shorts, aborting...";
-      await Logger.error(error);
+      Logger.error(error);
 
       return false;
     }
+
 
     return videosAvailable[Math.floor(Math.random() * videosAvailable.length)];
   }

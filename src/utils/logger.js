@@ -4,7 +4,7 @@ const { formatDate } = require("./format");
 const { PathResolve } = require("./resolve");
 
 class Logger {
-  static #logFilePath = path.join(PathResolve.getRootDir(), "logs/zshorts.log");
+  static #logFilePath = path.join(PathResolve.rootDir, "logs/zshorts.log");
 
   /**
    * Logs a message with a specified log level.

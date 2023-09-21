@@ -1,26 +1,43 @@
 const path = require("path");
+const fs = require("fs");
 
 class PathResolve {
-  static narrations = path.join(this.getRootDir(), "/tmp/narrations/");
-  static short_videos = path.join(this.getRootDir(), "/tmp/shorts_videos/");
-  static subtitles = path.join(this.getRootDir(), "/tmp/subtitles/");
-  static stories = path.join(this.getRootDir(), "/tmp/stories/");
-
-  static videos = path.join(this.getRootDir(), "/static/videos/");
-  static manual_story = path.join(
-    this.getRootDir(),
-    "/static/manual_story.json"
-  );
-  
-  static generated_shorts = path.join(this.getRootDir(), "/generated/shorts/");
+  static rootDir = path.join(__dirname, "../../");
+  static paths = {
+    narrations: path.join(this.rootDir, "tmp/narrations/"),
+    shortVideos: path.join(this.rootDir, "tmp/shorts_videos/"),
+    subtitles: path.join(this.rootDir, "tmp/subtitles/"),
+    stories: path.join(this.rootDir, "tmp/stories/"),
+    videos: path.join(this.rootDir, "static/videos/"),
+    manualStory: path.join(this.rootDir, "static/manual_story.json"),
+    generatedShorts: path.join(this.rootDir, "generated/shorts/"),
+  };
 
   /**
-   * Returns the root directory of the application.
+   * Ensures that a directory exists at the given path.
    *
-   * @returns {string} The root directory path.
+   * @param {string} directoryPath - The path of the directory to ensure.
+   * @returns {Promise<void>} - A promise that resolves when the directory is ensured.
    */
-  static getRootDir() {
-    return path.join(__dirname, "../../");
+  static async ensureDirectoryExists(directoryPath) {
+    try {
+      await fs.accessSync(directoryPath, fs.constants.F_OK);
+    } catch (err) {
+      if (directoryPath[directoryPath.length - 1] === "/") {
+        await fs.mkdirSync(directoryPath, { recursive: true });
+      }
+    }
+  }
+
+  /**
+   * Ensures that the directories specified in the paths object are created.
+   * @returns Promise<void>
+   */
+  static async initializePaths() {
+    const pathKeys = Object.keys(this.paths);
+    await Promise.all(
+      pathKeys.map((key) => this.ensureDirectoryExists(this.paths[key]))
+    );
   }
 }
 

@@ -13,7 +13,7 @@ const { PathResolve } = require("../utils/resolve");
  */
 async function overrideWithAcceleratedNarration(storyId, speed = "1.5") {
   const currentNarrationPath = path.join(
-    PathResolve.narrations,
+    PathResolve.paths.narrations,
     `${storyId}.mp3`
   );
   const acceleratedPath = currentNarrationPath + ".accelerated.mp3";
@@ -50,16 +50,16 @@ async function overrideWithAcceleratedNarration(storyId, speed = "1.5") {
  * @returns {Promise<void>} - A promise that resolves when the short video is generated.
  */
 async function makeShortVideo(video, storyId) {
-  const audioPath = path.join(PathResolve.narrations, `${storyId}.mp3`);
+  const audioPath = path.join(PathResolve.paths.narrations, `${storyId}.mp3`);
   const audioDuration = (await getFileDuration(audioPath)) + 2;
-
-  const randomVideoPath = path.join(PathResolve.videos, `${video}`);
-
+  
+  const randomVideoPath = path.join(PathResolve.paths.videos, `${video}`);
+  
   const videoDuration = await getFileDuration(randomVideoPath);
   const [min, max] = [0, videoDuration - audioDuration * 2];
   const randomStart = Math.floor(Math.random() * (max - min + 1) + min);
-
-  const savePath = path.join(PathResolve.short_videos, `${storyId}.mp4`);
+  
+  const savePath = path.join(PathResolve.paths.shortVideos, `${storyId}.mp4`);
 
   Logger.debug(
     `Generating short video for "${storyId}" starting from ${randomStart} seconds using video "${video}"...`
@@ -80,7 +80,7 @@ async function makeShortVideo(video, storyId) {
     }
 
     if (process.env.SUBTITLE_ENABLED == "true") {
-      const subtitlePath = path.join(PathResolve.subtitles, `${storyId}.srt`);
+      const subtitlePath = path.join(PathResolve.paths.subtitles, `${storyId}.srt`);
       ffmpegClient.videoFilter(
         `subtitles=${subtitlePath}:force_style='Outline=1.5,FontSize=12,PrimaryColour=&H0000FFFF'`
       );
@@ -106,9 +106,9 @@ async function makeShortVideo(video, storyId) {
  * @returns {Promise<string>} - The path of the joined video.
  */
 async function joinShortVideoWithAudio(storyId) {
-  const videoPath = path.join(PathResolve.short_videos, `${storyId}.mp4`);
-  const audioPath = path.join(PathResolve.narrations, `${storyId}.mp3`);
-  const savePath = path.join(PathResolve.generated_shorts, `${storyId}.mp4`);
+  const videoPath = path.join(PathResolve.paths.shortVideos, `${storyId}.mp4`);
+  const audioPath = path.join(PathResolve.paths.narrations, `${storyId}.mp3`);
+  const savePath = path.join(PathResolve.paths.generatedShorts, `${storyId}.mp4`);
 
   Logger.debug(`Joining short video with audio for "${storyId}"...`);
 

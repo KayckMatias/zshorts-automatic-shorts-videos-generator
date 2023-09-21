@@ -7,10 +7,12 @@ const { PathResolve } = require("./resolve");
  * Returns a list of all available videos in the videos directory.
  * @returns {array} - An array of video file names.
  */
-function listAllAvailableVideos() {
-  return fs.readdirSync(PathResolve.videos).filter((file) => {
+async function listAllAvailableVideos() {
+  const availableVideos = await fs.readdirSync(PathResolve.paths.videos).filter((file) => {
     return path.extname(file).toLowerCase() === ".mp4";
   });
+
+  return availableVideos;
 }
 
 /**
@@ -18,19 +20,22 @@ function listAllAvailableVideos() {
  * @returns {Promise<Object>} A promise that resolves to the default story file object.
  */
 async function getDefaultStoryFile() {
-  return new Promise((resolve, reject) => {
-    fs.readFile(PathResolve.manual_story, "utf8", (err, story) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(JSON.parse(story));
-      }
-    });
-  });
+  try {
+    const story = await fs.readFileSync(PathResolve.paths.manualStory, "utf8");
+    return JSON.parse(story);
+  } catch (err) {
+    if (err.code === "ENOENT") {
+      throw new Error(
+        "The default story file is not defined, please, copy 'static/manual_story.json.default' to 'static/manual_story.json' or change .env STORY_BY_GPT=true"
+      );
+    } else {
+      throw err;
+    }
+  }
 }
 
 async function getStoryData(storyId = null) {
-  const storyPath = path.join(PathResolve.stories, `${storyId}.json`);
+  const storyPath = path.join(PathResolve.paths.stories, `${storyId}.json`);
 
   const storyData = fs.readFileSync(storyPath, "utf8", (err, data) => {
     if (err) {

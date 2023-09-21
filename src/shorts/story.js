@@ -71,7 +71,7 @@ class Story {
    * @returns {void}
    */
   #saveStory(storyToSave) {
-    const pathToSave = path.join(PathResolve.stories, `${this.storyId}.json`);
+    const pathToSave = path.join(PathResolve.paths.stories, `${this.storyId}.json`);
     const storyStringify = JSON.stringify(storyToSave);
 
     fs.writeFile(pathToSave, storyStringify, (err) => {
@@ -90,7 +90,7 @@ class Story {
    * @returns {Promise<boolean>} - A promise that resolves to true if the narration is saved successfully, or rejects with an error.
    */
   #saveNarration(narration) {
-    const pathToSave = path.join(PathResolve.narrations, `${this.storyId}.mp3`);
+    const pathToSave = path.join(PathResolve.paths.narrations, `${this.storyId}.mp3`);
 
     const storyId = this.storyId;
     return new Promise((resolve, reject) => {
@@ -99,7 +99,7 @@ class Story {
           reject(err);
         }
         Logger.debug(
-          `Narration "${storyId}" saved in ${PathResolve.narrations}`
+          `Narration "${storyId}" saved in ${PathResolve.paths.narrations}`
         );
         resolve(true);
       });

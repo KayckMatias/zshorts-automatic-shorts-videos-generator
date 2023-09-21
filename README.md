@@ -1,10 +1,14 @@
 # zshorts
 ### A automatic shorts videos generator for youtube, tiktok and more...
 
+<br/>
+
 # Requirements
 - [x] FFmpeg
 - [x] node
 - [x] npm
+
+<br/>
 
 # Installation
 - To install run in terminal:
@@ -13,6 +17,8 @@ npm i
 ```
 - Copy .env.example to .env
 - Enjoy :D
+
+<br/>
 
 # Configuration
 First, <b>you need to populate the "```/static/videos```" folder with videos</b> that will be used as backgrounds for the generated shorts.
@@ -40,6 +46,8 @@ you can change language in .env on ```LANGUAGE_CHATGPT``` variable.
 ### Attention for subtitle
 We are using whisper to generate automatic subtitles, [read more about the models (available and requirements) here](https://github.com/openai/whisper#available-models-and-languages)
 
+<br/>
+
 # Usage
 To use it is very simple, just after making the configuration run in your terminal:
 ```shell
@@ -49,10 +57,17 @@ npm run generate
 ### Remember
 if you are using ```manual story``` mode, you need populate the file "```/static/manual_story.json```" with the data you want for your story.
 
+<br/>
+
 # Future Update:
 - [x] Add automatic subtitle in video based in audio generated
 - [ ] Add random categories and video filter based in category choiced (example, horror story: darkness filter to video)
 - [ ] ~~Add a automatic upload to youtube~~ (canceled because YouTube blocks the video due to "suspicion of spam")
 
-<br />
+<br/>
+
+# License
+
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information
+
 <p align="center">Made with &hearts; by Kayck Matias</p>

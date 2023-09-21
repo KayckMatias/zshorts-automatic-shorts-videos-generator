@@ -12,7 +12,7 @@ A automatic shorts videos generator for youtube, tiktok and more...
 ```shell
 npm i 
 ```
-- Copy .env.example to .env
+- [Configure](#Configure) using one of the two available modes
 - Enjoy :D
 
 ## Configuration

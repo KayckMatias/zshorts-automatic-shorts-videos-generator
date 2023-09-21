@@ -19,7 +19,8 @@ class ChatGpt {
           role: "user",
           content:
             process.env.PAYLOAD_CHATGPT +
-            " ATENÇÃO: o relato só pode ter no MÁXIMO 1250 caractéres, e precisa estar em linha única, sem quebra de linha. preciso que voce me retorne como se fosse um json válido, pois vou utilizar o JSON.parse(), contendo: title (titulo para o vídeo no youtube sobre a história), tags (keywords virais para o youtube, no minimo 5), description (Breve descrição sobre a história) and story para um video no youtube, faça esses dados chamativos.",
+              " ATTENTION: the report can only have a MAXIMUM of 1250 characters, and must be on a single line, without line breaks. I need you to return it to me as if it were a valid json, as I will use JSON.parse(), containing: title (title for the YouTube video about the story), tags (viral keywords for YouTube, at least 5), description (Brief description about the story) and story for a YouTube video, make this data eye-catching. IN LANGUAGE:" +
+              process.env?.LANGUAGE_CHATGPT ?? "en",
         },
       ],
       model: "gpt-3.5-turbo",

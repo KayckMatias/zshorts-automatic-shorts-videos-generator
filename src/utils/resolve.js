@@ -10,6 +10,7 @@ class PathResolve {
     shortVideos: path.join(this.rootDir, "tmp/shorts_videos/"),
     subtitles: path.join(this.rootDir, "tmp/subtitles/"),
     stories: path.join(this.rootDir, "tmp/stories/"),
+    logs: path.join(this.rootDir, "logs/"),
     videos: path.join(this.rootDir, "static/videos/"),
     manualStory: path.join(this.rootDir, "static/manual_story.json"),
     generatedShorts: path.join(this.rootDir, "generated/shorts/"),
@@ -26,7 +27,6 @@ class PathResolve {
       await fs.accessSync(directoryPath, fs.constants.F_OK);
     } catch (err) {
       if (directoryPath[directoryPath.length - 1] === "/") {
-        Logger.info(`Directory "${directoryPath}" does not exist, creating...`);
         await fs.mkdirSync(directoryPath, { recursive: true });
       }
     }

@@ -1,10 +1,13 @@
 const fs = require("fs");
 const path = require("path");
-const { formatDate } = require("./format");
+const { formatDate, formatedDateToFileLog } = require("./format");
 const PathResolve = require("./resolve");
 
 class Logger {
-  static #logFilePath = path.join(PathResolve.rootDir, "logs/zshorts.log");
+  static #logFilePath = path.join(
+    PathResolve.paths.logs,
+    `${formatedDateToFileLog()}_zshorts.log`
+  );
 
   /**
    * Logs a message with a specified log level.
@@ -26,8 +29,8 @@ class Logger {
    * @param {string} message
    * @returns {void}
    */
-  static #appendFile(message) {
-    this.#validateLog();
+  static async #appendFile(message) {
+    await this.#validateLog();
     fs.appendFile(this.#logFilePath, message, (err) => {
       if (err) {
         console.error(`Error writing log: ${err}`);
@@ -39,7 +42,7 @@ class Logger {
    * Validates the log file path and creates a log file if it doesn't exist.
    * @returns {void}
    */
-  static #validateLog() {
+  static async #validateLog() {
     if (!fs.existsSync(this.#logFilePath)) {
       try {
         fs.writeFileSync(this.#logFilePath, "");

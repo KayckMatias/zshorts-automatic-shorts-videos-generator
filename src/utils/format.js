@@ -28,6 +28,10 @@ function formatDate() {
   return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 }
 
+function formatedDateToFileLog() {
+  return new Date().toISOString().slice(0, 10).replace(/-/g, '_');
+}
+
 function formatStoryData(storyData) {
   return `Story Info: \r
   ID: ${storyData.id} \r
@@ -40,5 +44,6 @@ function formatStoryData(storyData) {
 module.exports = {
   formatDate,
   formatPadStart,
+  formatedDateToFileLog,
   formatStoryData
 };

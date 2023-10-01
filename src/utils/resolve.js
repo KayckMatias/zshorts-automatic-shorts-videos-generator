@@ -26,7 +26,7 @@ class PathResolve {
     try {
       await fs.accessSync(directoryPath, fs.constants.F_OK);
     } catch (err) {
-      if (directoryPath[directoryPath.length - 1] === "/") {
+      if (directoryPath[directoryPath.length - 1] === path.sep) {
         await fs.mkdirSync(directoryPath, { recursive: true });
       }
     }
